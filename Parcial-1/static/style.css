@@ -1,0 +1,255 @@
+:root {
+  --paper: #F3EEE1;
+  --ink: #1E241C;
+  --ink-soft: #5B6459;
+  --brand: #1B5E3F;
+  --brand-dark: #123B29;
+  --brass: #B4832C;
+  --screen-bg: #0F2019;
+  --screen-line: #1B3327;
+  --led: #8FE3B0;
+  --line: rgba(30, 36, 28, 0.14);
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 24px 72px;
+}
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.masthead__mark {
+  color: var(--brass);
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.masthead h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 34px;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.masthead p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+/* ---------- Machine layout ---------- */
+
+.machine {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 720px) {
+  .machine { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.panel__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+h2.panel__label { font-family: 'Inter', sans-serif; }
+
+/* ---------- Screen / amount entry ---------- */
+
+.screen {
+  background: var(--screen-bg);
+  border: 1px solid var(--screen-line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.screen__currency {
+  color: var(--led);
+  opacity: 0.6;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+}
+
+.screen__value {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--led);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 32px;
+  font-weight: 500;
+  width: 100%;
+  letter-spacing: 0.01em;
+}
+
+.screen__value::placeholder { color: var(--led); opacity: 0.35; }
+
+.quick-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.quick {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 7px 10px;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.quick:hover { border-color: var(--brand); color: var(--brand); }
+
+/* ---------- Keypad ---------- */
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.key {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  padding: 14px 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.key:hover { background: #EAE3D0; }
+
+.key--wide { grid-column: span 2; font-family: 'Inter', sans-serif; font-size: 13px; }
+
+.key--action {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.key--action:hover { background: var(--brand-dark); }
+
+.error {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: #A13E2F;
+}
+
+/* ---------- Result panel ---------- */
+
+.empty {
+  color: var(--ink-soft);
+  font-size: 14px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.bills {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bill-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+}
+
+.bill-row__denom {
+  min-width: 84px;
+  font-weight: 600;
+}
+
+.bill-row__bar-track {
+  height: 8px;
+  background: #EFE9D9;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bill-row__bar-fill {
+  height: 100%;
+  background: var(--brand);
+}
+
+.bill-row--coin .bill-row__bar-fill { background: var(--brass); }
+
+.bill-row__qty {
+  white-space: nowrap;
+  color: var(--ink-soft);
+}
+
+.tally {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.tally__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 3px 0;
+}
+
+.tally__row--muted { color: #A13E2F; font-size: 13px; }
+
+/* ---------- Footnote ---------- */
+
+.footnote {
+  margin-top: 32px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}

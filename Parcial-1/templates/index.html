@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispensa — Cajero con retiro óptimo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <span class="masthead__mark">◆</span>
+    <div>
+      <h1>Dispensa</h1>
+      <p>Retiro con el menor número de billetes y monedas — algoritmo Greedy</p>
+    </div>
+  </header>
+
+  <main class="machine">
+
+    <section class="panel panel--entry">
+      <label class="panel__label" for="monto">Monto a retirar (COP)</label>
+      <div class="screen">
+        <span class="screen__currency">$</span>
+        <input id="monto" class="screen__value" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
+      </div>
+
+      <div class="quick-amounts">
+        <button type="button" class="quick" data-amount="50000">$50.000</button>
+        <button type="button" class="quick" data-amount="100000">$100.000</button>
+        <button type="button" class="quick" data-amount="187650">$187.650</button>
+        <button type="button" class="quick" data-amount="273300">$273.300</button>
+      </div>
+
+      <div class="keypad">
+        <button type="button" class="key" data-key="1">1</button>
+        <button type="button" class="key" data-key="2">2</button>
+        <button type="button" class="key" data-key="3">3</button>
+        <button type="button" class="key" data-key="4">4</button>
+        <button type="button" class="key" data-key="5">5</button>
+        <button type="button" class="key" data-key="6">6</button>
+        <button type="button" class="key" data-key="7">7</button>
+        <button type="button" class="key" data-key="8">8</button>
+        <button type="button" class="key" data-key="9">9</button>
+        <button type="button" class="key key--wide" data-key="clear">Borrar</button>
+        <button type="button" class="key" data-key="0">0</button>
+        <button type="button" class="key key--action" id="btn-dispensar">Dispensar</button>
+      </div>
+
+      <p class="error" id="error" hidden></p>
+    </section>
+
+    <section class="panel panel--result">
+      <h2 class="panel__label">Desglose entregado</h2>
+      <div id="result-empty" class="empty">
+        Ingresa un monto y presiona <strong>Dispensar</strong> para ver
+        qué billetes y monedas salen del cajero.
+      </div>
+
+      <div id="result-body" class="result" hidden>
+        <ul class="bills" id="bills-list"></ul>
+        <div class="tally">
+          <div class="tally__row">
+            <span>Piezas totales entregadas</span>
+            <strong id="tally-total">0</strong>
+          </div>
+          <div class="tally__row tally__row--muted" id="tally-remainder-row" hidden>
+            <span>Monto no cubierto (no divisible en $50)</span>
+            <strong id="tally-remainder">$0</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footnote">
+    Denominaciones disponibles:
+    {% for d in denominaciones %}${{ "{:,}".format(d) }}{% if not loop.last %} · {% endif %}{% endfor %}
+  </footer>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
