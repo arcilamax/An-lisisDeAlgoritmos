@@ -74,4 +74,4 @@ python3 -m unittest test_greedy.py -v
 
 ## Video de sustentación
 
-[Enlace al video](AGREGAR-ENLACE-AQUI)
+[Enlace al video] https://youtu.be/-WZ31d-pX98
