@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Recomendador por grafo — PageRank de productos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<div class="envoltura">
+  <header class="encabezado">
+    <div class="marca">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <circle cx="4" cy="11" r="2.6" fill="#57e3c4"/>
+        <circle cx="18" cy="5" r="2.6" fill="#ffb454"/>
+        <circle cx="18" cy="17" r="2.6" fill="#ffb454"/>
+        <line x1="4" y1="11" x2="18" y2="5" stroke="#5b6070" stroke-width="1.3"/>
+        <line x1="4" y1="11" x2="18" y2="17" stroke="#5b6070" stroke-width="1.3"/>
+      </svg>
+      recomendador · grafo
+    </div>
+    <nav>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#tendencias">Tendencias</a>
+      <a href="#como-funciona">Cómo funciona</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Cada clic dibuja un camino en el grafo.</h1>
+      <p>Este recomendador conecta 30 productos en un grafo según su categoría y lo que tienen en común, y usa PageRank para decidir qué mostrarte a continuación: uno global, para lo más popular del catálogo, y uno personalizado, para lo más relacionado con lo que acabas de ver.</p>
+      <a href="#catalogo" class="boton">Explorar catálogo →</a>
+    </div>
+    <div class="hero-grafo">
+      <svg id="svg-grafo" viewBox="0 0 420 420"></svg>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <h2 class="titulo-seccion">Catálogo</h2>
+    <p class="subtitulo-seccion">Elige un producto y el algoritmo recorre el grafo desde ahí para armar tus recomendaciones.</p>
+    <div class="filtros" id="filtros-categoria"></div>
+    <div class="grid-catalogo" id="grid-catalogo"></div>
+
+    <div class="panel-recomendacion" id="panel-recomendacion">
+      <div class="encabezado-panel">
+        <h3 id="titulo-panel"></h3>
+        <span class="nota-algoritmo">PageRank personalizado (semilla = producto elegido)</span>
+      </div>
+      <div class="rail-recomendados" id="rail-recomendados"></div>
+    </div>
+  </section>
+
+  <section id="tendencias">
+    <h2 class="titulo-seccion">Tendencias generales</h2>
+    <p class="subtitulo-seccion">Los productos más centrales de todo el grafo, calculados con PageRank global (sin partir de ningún producto en particular).</p>
+    <div class="lista-tendencias" id="lista-tendencias"></div>
+  </section>
+
+  <section id="como-funciona">
+    <h2 class="titulo-seccion">Cómo funciona</h2>
+    <p class="subtitulo-seccion">Un vistazo rápido al grafo y al algoritmo. La explicación completa está en el README de cada carpeta.</p>
+    <div class="explicacion">
+      <div class="bloque-explicacion">
+        <h3>El grafo</h3>
+        <p>Cada producto es un nodo. Dos productos quedan unidos por una arista si comparten categoría o etiquetas (por ejemplo, "running" o "viaje"); mientras más tengan en común, más fuerte es la conexión. Este grafo vive en <strong>01-datos-grafo</strong>.</p>
+      </div>
+      <div class="bloque-explicacion">
+        <h3>PageRank</h3>
+        <p>El mismo algoritmo que ordenaba páginas web, aplicado a productos. Simula un recorrido aleatorio por el grafo y mide qué tan seguido se "llega" a cada nodo.</p>
+        <div class="formula">PR(v) = (1-d)·teleport(v) + d·Σ PR(u)·peso(u,v)/pesoTotal(u)</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Examen 2 — Análisis de Algoritmos · Algoritmo de grafos: recorrido + PageRank (global y personalizado).
+    Repositorio y video de sustentación: <em>agregar enlaces aquí</em>.
+  </footer>
+</div>
+
+<script src="{{ url_for('static', filename='productos.js') }}"></script>
+<script src="{{ url_for('static', filename='grafo.js') }}"></script>
+<script src="{{ url_for('static', filename='pagerank.js') }}"></script>
+<script src="{{ url_for('static', filename='api.js') }}"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
