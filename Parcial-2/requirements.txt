@@ -1,1 +1,3 @@
 Flask>=3.0
+
+"en la terminal: pip install -r requirements.txt"
