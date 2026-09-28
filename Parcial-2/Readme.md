@@ -4,7 +4,7 @@ Examen 2 - Análisis de Algoritmos
 
 ## Video de sustentación
 
-**[AGREGAR AQUÍ EL LINK DEL VIDEO]**
+**[(https://youtu.be/Eodp-nKzx5E)]**
 
 ## Problema
 
