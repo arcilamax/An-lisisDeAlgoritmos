@@ -55,3 +55,8 @@ Complejidad: O(n log n) por aula (ordenar + búsqueda binaria + un recorrido).
 Ejecutar `python main.py` muestra, por aula, la tabla de PD, las reservas aceptadas y
 la comparación con la estrategia voraz (aceptar siempre la más cara), que no siempre
 es óptima.
+
+
+## Link Video
+https://www.youtube.com/watch?v=9xM9NeXjzBQ
+
