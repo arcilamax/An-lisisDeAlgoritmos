@@ -34,8 +34,6 @@ Familia: heap (el triaje)
 Idea: se mantiene un **min-heap de tamaño `k`** con los `k` mayores vistos. Si el heap está lleno y llega un valor mayor que la raíz, sale la raíz y entra el nuevo. Al terminar, la raíz es el k-ésimo mayor. No se ordena el arreglo completo.  
 Complejidad: tiempo **`O(n log k)`** (cada uno de los `n` elementos hace a lo sumo una operación `O(log k)` en el heap); espacio extra **`O(k)`**. `n = len(nums)`.
 
-![Accepted — Kth Largest](evidencias/kth-largest-accepted.png)
-
 ## 179. Largest Number
 
 Enlace: <https://leetcode.com/problems/largest-number/>  
@@ -44,8 +42,6 @@ Código: [largest-number/solution.py](largest-number/solution.py)
 Familia: ordenamiento (la clave)  
 Idea: se pasan los números a cadena y se ordenan con el comparador **`a` antes que `b` si `a + b > b + a`** (concatenación, no suma). Así `2` va antes que `10` porque `"210" > "102"`. Si el resultado empieza en `"0"`, todo son ceros y se devuelve `"0"`.  
 Complejidad: tiempo **`O(n log n)`** comparaciones, cada una `O(L)` (longitud de las cadenas, ≤ 10 dígitos); espacio **`O(n)`** para las cadenas y la salida. `n = len(nums)`.
-
-![Accepted — Largest Number](evidencias/largest-number-accepted.png)
 
 ## 743. Network Delay Time
 
@@ -57,8 +53,6 @@ Modelo: grafo **dirigido y ponderado** (pesos ≥ 0); arco `u → v` con peso `w
 Idea: **Dijkstra desde `k`** con min-heap de distancia tentativa; se fija el nodo de menor tiempo acumulado y se relajan sus arcos. La respuesta es la **mayor** distancia final (hay que esperar al nodo que más tarda); si algún nodo no se alcanzó, `-1`.  
 Complejidad: tiempo **`O((n + m) log n)`**, espacio **`O(n + m)`**. `n` = nodos, `m = len(times)`.
 
-![Accepted — Network Delay Time](evidencias/network-delay-time-accepted.png)
-
 ## 1584. Min Cost to Connect All Points
 
 Enlace: <https://leetcode.com/problems/min-cost-to-connect-all-points/>  
@@ -67,9 +61,7 @@ Código: [min-cost-to-connect-all-points/solution.py](min-cost-to-connect-all-po
 Familia: grafos (árbol de recubrimiento mínimo) — **Kruskal**  
 Modelo: grafo completo no dirigido; vértices = puntos, peso de cada arista = distancia de Manhattan.  
 Idea: se generan las `n(n−1)/2` aristas, se **ordenan por peso** y se recorren: con **Union-Find** se acepta la arista si une componentes distintas y se rechaza si cerraría un ciclo. Se para al aceptar `n − 1` aristas; la suma de sus pesos es el costo.  
-Complejidad: hay `Θ(n²)` aristas, así que el sort da tiempo **`O(n² log n)`** (Union-Find con compresión y rango es casi constante por operación); espacio **`O(n²)`** para la lista de aristas. `n = len(points)`.
-
-![Accepted — Min Cost to Connect All Points](evidencias/min-cost-to-connect-all-points-accepted.png)
+Complejidad: hay `Θ(n²)` aristas, así que el sort da tiempo **`O(n² log n)`** (Union-Find con compresión y rango es casi constante por operación); espacio **`O(n²)`** para la lista de aristas. `n = len(points`.
 
 ## 72. Edit Distance
 
@@ -82,8 +74,6 @@ Base: `dp[i][0] = i` (borrar `i` letras), `dp[0][j] = j` (insertar `j` letras).
 Recurrencia: si `word1[i−1] == word2[j−1]`, `dp[i][j] = dp[i−1][j−1]`; si no, `dp[i][j] = 1 + min(dp[i−1][j], dp[i][j−1], dp[i−1][j−1])` (borrar, insertar, sustituir). La respuesta es `dp[n][m]`.  
 Complejidad: tiempo **`Θ(n·m)`**, espacio **`Θ(n·m)`**. `n = len(word1)`, `m = len(word2)`.
 
-![Accepted — Edit Distance](evidencias/edit-distance-accepted.png)
-
 ## 300. Longest Increasing Subsequence
 
 Enlace: <https://leetcode.com/problems/longest-increasing-subsequence/>  
@@ -95,8 +85,6 @@ Base: `dp[i] = 1` (el elemento solo).
 Recurrencia: `dp[i] = max(dp[i], 1 + dp[j])` para todo `j < i` con `nums[j] < nums[i]`. La respuesta es `max(dp)`, no `dp[n−1]`.  
 Complejidad: tiempo **`Θ(n²)`**, espacio **`Θ(n)`**. `n = len(nums)`.
 
-![Accepted — Longest Increasing Subsequence](evidencias/longest-increasing-subsequence-accepted.png)
-
 ## 134. Gas Station
 
 Enlace: <https://leetcode.com/problems/gas-station/>  
@@ -106,8 +94,6 @@ Familia: greedy
 Idea / criterio: una pasada sumando `gas[i] − cost[i]` a un tanque. Si el tanque queda **negativo** en `i`, se **descarta todo el tramo** desde el inicio candidato hasta `i`: cualquier estación intermedia llega a `i` con igual o menos combustible que el inicio (el prefijo que se salta tenía balance ≥ 0), así que tampoco pasa. El nuevo candidato es `i + 1` con tanque en 0 y no se vuelve atrás. Si `sum(gas) < sum(cost)` la respuesta es `-1`; si no, el último candidato es la salida (única).  
 Complejidad: tiempo **`Θ(n)`**, espacio extra **`Θ(1)`**. `n = len(gas)`.
 
-![Accepted — Gas Station](evidencias/gas-station-accepted.png)
-
 ## 79. Word Search
 
 Enlace: <https://leetcode.com/problems/word-search/>  
@@ -116,5 +102,3 @@ Código: [word-search/solution.py](word-search/solution.py)
 Familia: backtracking  
 Idea: desde cada celda se lanza `buscar(r, c, k)` (posición e índice de la letra que toca). **Se elige** un vecino ortogonal que coincida con `word[k]`, **se marca** la celda con `#` para no pisarla dos veces y se avanza a `k + 1`. Al volver, **se deshace** la marca (se restaura la letra) y se prueba otro vecino. La diagonal no es vecina.  
 Complejidad: tiempo **`O(m·n·4^L)`** en el peor caso (cada arranque explora ramas de hasta 4 vecinos y profundidad `L`); espacio **`O(L)`** de la pila de recursión. Grilla `m × n`, `L = len(word)`.
-
-![Accepted — Word Search](evidencias/word-search-accepted.png)
